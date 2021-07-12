@@ -1,6 +1,6 @@
 use std::env;
 use std::fs::File;
-use std::io::{BufRead, BufReader};
+// use std::io::{BufRead, BufReader};
 // use std::collections::HashMap;
 
 mod args;
@@ -24,20 +24,9 @@ fn main() {
     let file = File::open(in_file).unwrap();
     //let reader = BufReader::new(file);
 
-    validation::validate(&file);
+    let is_valid = validation::validate(&file);
 
-    /*
-    let mut seqInd = 1;
-    for (index, line) in reader.lines().enumerate() {
-	let mut line = line.unwrap();
-	//println!("{}", line);
-
-	validation::validate(&line, index, seqInd);
-	
-	seqInd = seqInd + 1;
-	if seqInd > 4 {
-	    seqInd = 1;
-	}
+    if is_valid {
+	println!("Now do other stuff");
     }
-     */
 }
