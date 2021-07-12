@@ -12,6 +12,10 @@ pub fn parse(args: &Vec<String>) -> HashMap<String, String> {
 	    i = i + 1;
 	    options.insert("input".to_string(), args[i].to_string());
 	}
+
+	if args[i] == "--skip-validation" {
+	    options.insert("skip-validation".to_string(), "true".to_string());
+	}
 	i = i + 1
     }
     
