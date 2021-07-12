@@ -5,15 +5,16 @@ use std::fs::File;
 
 mod args;
 mod validation;
+mod trim;
 
 fn main() {
     let inputs: Vec<String> = env::args().collect();
     let options = args::parse(&inputs);
 
-    let mut in_file = "".to_string();
+    let mut in_file = "";
     match options.get("input") {
 	Some(v) => {
-	    in_file = v.to_string();
+	    in_file = v;
 	}
 	None => {
 	    eprintln!("error: {:?}", "no input file provided");
@@ -30,15 +31,15 @@ fn main() {
 	}
     }
     
-    let file = File::open(in_file).unwrap();
-    //let reader = BufReader::new(file);
-
     let mut is_valid = true;
     if !skip_validation {
+	let file = File::open(in_file).unwrap();
 	is_valid = validation::validate(&file);
     }
     
     if is_valid {
-	println!("Now do other stuff");
+	//println!("Now do other stuff");
+	let file = File::open(in_file).unwrap();
+	trim::trim(&file, 30);
     }
 }
